@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
+
+  <title>RHNBioskop</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+  <!-- jQuery -->
+  <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+  <!-- Bootstrap4 files-->
+  <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+  <link href="css/bootstrap-custom.css" rel="stylesheet" type="text/css" />
+
+  <!-- Font awesome 5 -->
+  <link href="fonts/fontawesome/css/fontawesome-all.min.css" type="text/css" rel="stylesheet">
+
+  <!-- plugin: fancybox  -->
+  <script src="plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
+  <link href="plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
+
+  <!-- custom style -->
+  <link href="css/uikit.css" rel="stylesheet" type="text/css" />
+  <link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+  <!-- custom javascript -->
+  <script src="js/script.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    /// some script
+
+    // jquery ready start
+    $(document).ready(function () {
+      // jQuery code
+
+    });
+// jquery end
+  </script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">RHNBioskop</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01"
+        aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+      </div>
+    </div>
+  </nav>
+
+
+  <section class="container">
+    <h1 class="text-center pt-4">   </h1>
+    <div class="row">
+      <div class="col-md-6 text-justify">
+        <img src="./images/img/film1.jpeg" style="background-size: cover; width: 100%;">
+      </div>
+      <div class="col-md-6 justify-content-center">
+        <h1 class="pt-4">Si Doel</h1>
+        <form action="" method="post">
+          <div class="form-group row">
+            <label for="" class="col-sm-3">Hari</label>
+            <div class="col-sm-9">
+              <select onchange="return selectHari(this.value)" name="hari" id="hari" class="form-control">
+                <option value="">Pilih Hari</option>
+                <option value="minggu">Minggu</option>
+                <option value="senin">Senin</option>
+                <option value="selasa">Selasa</option>
+                <option value="rabu">Rabu</option>
+                <option value="kamis">Kamis</option>
+                <option value="jumat">Sabtu</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3">Harga Tiket</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" value="42000">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3">Jam Tayang</label>
+            <div class="col-sm-9">
+              <select name="hari" id="hari" class="form-control">
+                <option value="09:30">09:30</option>
+                <option value="12:00">12:00</option>
+                <option value="14:30">14:30</option>
+                <option value="18:00">18:00</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3">Jumlah tiket</label>
+            <div class="col-sm-9">
+              <input id="tiket" type="number" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3">Total</label>
+            <div class="col-sm-9">
+              <input id="total" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3">Submit</label>
+            <div class="col-sm-9">
+              <button type="button" onclick="return submitForm()" class="btn btn-success"
+                id="btn submit">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- ========================= SECTION CONTENT END// ========================= -->
+  <script>
+    var harga = 42000
+    var hari = ''
+    var diskon = 0
+    var hargaDiskon = 0
+    var jumlah_tiket = 1
+    var subtotal = 0
+
+    var total = document.getElementById('total')
+    var tiket = document.getElementById('tiket')
+
+    function selectHari(value) {
+      hari = value
+      hargaDiskon = 0
+      if (value === 'selasa' || value === 'kamis') {
+        diskon = harga * 0.3
+        hargaDiskon = harga - diskon
+        selectTicket(jumlah_tiket)
+      } else {
+        hargaDiskon = harga
+        selectTicket(jumlah_tiket)
+      }
+    }
+
+    $("#tiket").keyup(function () {
+      selectTicket($(this).val());
+    });
+
+    function selectTicket(val) {
+      if (parseInt(val) < 1) {
+        subtotal = parseInt(hargaDiskon) * 1
+        tiket.value = 1
+        return
+      } else {
+        jumlah_tiket = val
+        tiket.value = parseInt(jumlah_tiket)
+        if (hari === 'selasa' && parseInt(jumlah_tiket) >= 5 || hari === 'kamis' && parseInt(jumlah_tiket) >= 5) {
+          diskon = parseInt(hargaDiskon) * parseInt(jumlah_tiket) * 0.2
+          subtotal = parseInt(hargaDiskon) * parseInt(jumlah_tiket)
+          total.value = subtotal - diskon
+        } else {
+          subtotal = parseInt(hargaDiskon) * parseInt(jumlah_tiket)
+          total.value = subtotal
+        }
+      }
+
+    }
+
+    function submitForm() {
+      alert('Terima kasih atas kepercayaan anda membeli tiket kami')
+    }
+  </script>
+</body>
+
+</html>
